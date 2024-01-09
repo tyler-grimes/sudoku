@@ -14,9 +14,8 @@ import random
 
 t = turtle.Turtle()
 
-
+# creates blank grid
 grid = []
-
 for i in range(0,9):
     temp = []
     for j in range(0,9):
