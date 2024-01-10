@@ -40,15 +40,51 @@ numbers = [1,2,3,4,5,6,7,8,9]
 
 
 
-for row in range(0,9):
-    for col in range(0,9):
-        value = random.choice(numbers)
-        if not(value in grid[row]):
-            for row in range(0,9):
-                if not(value in grid[row][col]):
-                
-                    square = []
 
-        
+
+def isValid(row, col, num):
+    # check to see if the number is in the row
+    if num in grid[row]:
+        return False
     
-pprint(grid)
+    # check to see if the number is in the column
+    if num in [grid[n][col] for n in range(0, 9)]:
+        return False
+    
+    # check to see if the number is in the 3x3 square
+    start_row, start_col = 3 * (row // 3), 3 * (col // 3)
+    for i in range(start_row, start_row + 3):
+        for j in range(start_col, start_col + 3):
+            if grid[i][j] == num:
+                return False
+    
+    return True
+
+    
+
+def fillNumbers(row, col):
+    if row == 9:
+        return True
+    
+    if col == 9:
+        return fillNumbers(row + 1, 0)
+
+    if grid[row][col] != 0:
+        return fillNumbers(row, col + 1)
+
+    for num in random.sample(numbers, len(numbers)):
+        if isValid(row, col, num):
+            grid[row][col] = num
+            if fillNumbers(row, col + 1):
+                return True
+            grid[row][col] = 0
+
+    return False    
+
+def fillGrid():
+    fillNumbers(0,0)
+    pprint(grid)
+      
+
+fillGrid() 
+
