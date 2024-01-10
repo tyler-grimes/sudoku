@@ -2,6 +2,7 @@ import turtle
 from pprint import pprint
 import random
 
+
 # Generate a full grid of numbers (fully filled in). This step is more complex as it seems as we cannot just randomly generate 
 # numbers to fill in the grid. We have to make sure that these numbers are positioned on the grid following 
 # the Sudoku rules. To do so will use a sudoku solver algorithm (backtracking algorithm) that we will apply to 
